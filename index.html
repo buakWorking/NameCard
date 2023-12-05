@@ -13,40 +13,25 @@
     <p>Email: john.doe@example.com</p>
     <p>Phone: +1234567890</p>
 
-    <button onclick="addToContacts()">Add to Contacts</button>
+    <button id="save-btn">Add to Contacts</button>
 
     <script>
-        function addToContacts() {
-            if ('contacts' in navigator && 'ContactsManager' in window) {
-                const contact = new Contact({
-                    name: 'John Doe',
-                    email: ['john.doe@example.com'],
-                    phone: [{ type: 'mobile', value: '+1234567890' }]
-                });
-
-                const props = ['name', 'email', 'phone'];
-
-                const opts = { multiple: false };
-
-                const savePromise = navigator.contacts.select(props, opts)
-                    .then(contacts => {
-                        // If contacts exist, save the new contact
-                        if (contacts.length > 0) {
-                            return contacts[0].save();
-                        }
-                        // Otherwise, create a new contact
-                        return navigator.contacts.save(contact);
-                    });
-
-                savePromise.then(() => {
-                    alert('Contact saved successfully!');
-                }).catch(err => {
-                    console.error('Error saving contact:', err);
-                });
-            } else {
-                alert('Contacts API not supported in this browser.');
-            }
-        }
+        save = document.getElementById("save-btn");
+        save.addEventListener("click", function() {
+            var contact = {
+                name: "John Doe",
+                email: "john.doe@eample.com",
+                phone: "1234567890"
+        };
+            var vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:"+contact.name+"\nTEL:;TYPE=work,voice:"+contact.phone+"\nEMAIL:"+contact.email+"\nEND:VCARD";
+            var blob = new Blob([vcard],{type:"text/vcard"});
+            var url = URL.createbjectURL(blob);
+            save.href = url;
+            save.download = contact.name+".vcf";
+        });
+            
+        
+           
     </script>
 
 </body>
