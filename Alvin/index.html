@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+</head>
+<body>
+
+    <h1>Contact Information</h1>
+    
+    <p>Name: John Doe</p>
+    <p>Email: john.doe@example.com</p>
+    <p>Phone: +1234567890</p>
+
+    <button onclick="addToContacts()">Add to Contacts</button>
+
+    <script>
+        function addToContacts() {
+            if ('contacts' in navigator && 'ContactsManager' in window) {
+                const contact = new Contact({
+                    name: 'John Doe',
+                    email: ['john.doe@example.com'],
+                    phone: [{ type: 'mobile', value: '+1234567890' }]
+                });
+
+                const props = ['name', 'email', 'phone'];
+
+                const opts = { multiple: false };
+
+                const savePromise = navigator.contacts.select(props, opts)
+                    .then(contacts => {
+                        // If contacts exist, save the new contact
+                        if (contacts.length > 0) {
+                            return contacts[0].save();
+                        }
+                        // Otherwise, create a new contact
+                        return navigator.contacts.save(contact);
+                    });
+
+                savePromise.then(() => {
+                    alert('Contact saved successfully!');
+                }).catch(err => {
+                    console.error('Error saving contact:', err);
+                });
+            } else {
+                alert('Contacts API not supported in this browser.');
+            }
+        }
+    </script>
+
+</body>
+</html>
