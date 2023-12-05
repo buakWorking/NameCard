@@ -25,7 +25,7 @@
         };
             var vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:"+contact.name+"\nTEL:;TYPE=work,voice:"+contact.phone+"\nEMAIL:"+contact.email+"\nEND:VCARD";
             var blob = new Blob([vcard],{type:"text/vcard"});
-            var url = URL.createbjectURL(blob);
+            var url = URL.createObjectURL(blob);
 
             const newLink = document.createElement("a");
             newLink.download = contact.name+".vcf";
