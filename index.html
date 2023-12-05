@@ -19,9 +19,9 @@
         save = document.getElementById("save-btn");
         save.addEventListener("click", function() {
             var contact = {
-                name: "John Doe",
-                email: "john.doe@eample.com",
-                phone: "1234567890"
+                name: "Alvin2",
+                email: "alvinchan@ptt.com.my",
+                phone: "0136976800"
         };
             var vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:"+contact.name+"\nTEL:;TYPE=work,voice:"+contact.phone+"\nEMAIL:"+contact.email+"\nEND:VCARD";
             var blob = new Blob([vcard],{type:"text/vcard"});
