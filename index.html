@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/vcard-js@1.0.0/dist/vCard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vcard-js@3.0.0/dist/vCard.min.js"></script>
 
 </head>
 <body>
@@ -18,10 +18,8 @@
     <button id="save-btn">Add to Contacts</button>
 
     <script>
-        var vCardJS = require('vcards-js');
-
 //create a new vCard
-var vCard = vCardsJS();
+var vCard = vCards();
 
 //set basic properties shown before
 vCard.firstName = 'Alvin';
