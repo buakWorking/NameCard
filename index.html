@@ -16,26 +16,45 @@
     <button id="save-btn">Add to Contacts</button>
 
     <script>
-        save = document.getElementById("save-btn");
-        save.addEventListener("click", function() {
-            var contact = {
-                name: "Alvin2",
-                email: "alvinchan@ptt.com.my",
-                phone: "0136976800"
-        };
-            var vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:"+contact.name+"\nTEL:;TYPE=work,voice:"+contact.phone+"\nEMAIL:"+contact.email+"\nEND:VCARD";
-            var blob = new Blob([vcard],{type:"text/vcard"});
-            var url = URL.createObjectURL(blob);
+        var vCardJS = require('vcards-js');
 
-            const newLink = document.createElement("a");
-            newLink.download = contact.name+".vcf";
-            newLink.textContent = contact.name;
-            newLink.href = url;
-            newLink.click();
-        });
-            
-        
-           
+//create a new vCard
+var vCard = vCardsJS();
+
+//set basic properties shown before
+vCard.firstName = 'Alvin';
+vCard.lastName = 'Chan';
+vCard.organization = 'PTT';
+vCard.position = "Senior IT Executive";
+vCard.workPhone = "013-6976800";
+vCard.workEmail = "alvinchan@ptt.com.my";
+//or embed image
+vCard.photo.attachFromUrl('C:/Users/Intern/Desktop/NameCardTest/Alvin.jpeg');
+
+
+vCard.companyFax = "03-50360598";
+vCard.companyPhone = "03-50360588";
+vCard.companyWebsite['PTT'] = "https://ptt.com.my/";
+vCard.companyWebsite['PTTGroup'] = "https://pttgroup.com.my/";
+
+vCard.logo.attachFromUrl("C:/Users/Intern/Desktop/NameCardTest/2.jpeg");
+
+vCard.companyAddress.label = "PEMBINAAN TETAP TEGUH SDN BHD";
+vCard.companyAddress.block = "B1-1-1, Bangunan PTT, Space U8,"
+vCard.companyAddress.street = "No.6, Persiaran Pasak Bumi";
+vCard.companyAddress.city = "Taman Bukit Jelutong, Seksyen U8,";
+vCard.companyAddress.postalCode = "40150 Shah Alam, Selangor D.E.";
+
+vCard.version = '3.0';
+
+vCard.saveToFile('./alvin.vcf')
+
+var button = document.getElementById("save-btn");
+
+button.addEventListener("click", function () {
+    console.log(vCard.getFormattedString());
+});
+
     </script>
 
 </body>
